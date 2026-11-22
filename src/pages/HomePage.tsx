@@ -306,7 +306,68 @@ export const HomePage = () => {
 
       </section>
 
-      {/* 3. OS 3 PILARES DE ATUAÇÃO (CALMO, ESPAÇADO E DIRETO) */}
+      {/* 3. FORMAÇÃO ACADÊMICA (UTFPR - CIÊNCIA DA COMPUTAÇÃO) */}
+      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        
+        <div className="space-y-1 pb-4 border-b border-corporate-200/80">
+          <span className="text-xs font-mono uppercase tracking-wider text-corporate-500 font-semibold">
+            Base Acadêmica
+          </span>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-corporate-950">
+            Formação Acadêmica
+          </h2>
+          <p className="text-sm text-corporate-600 max-w-xl">
+            Fundamentos teóricos sólidos aplicados à construção de software e modelagem de dados.
+          </p>
+        </div>
+
+        <div className="rounded-2xl border border-corporate-200/90 bg-white p-6 sm:p-8 shadow-sm space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-5 border-b border-corporate-100">
+            <div className="space-y-1">
+              <span className="text-xs font-mono text-corporate-500 uppercase tracking-wider font-semibold">
+                Graduação · Bacharelado
+              </span>
+              <h3 className="text-xl sm:text-2xl font-bold text-corporate-950">
+                Ciência da Computação
+              </h3>
+              <p className="text-sm font-medium text-corporate-700">
+                Universidade Tecnológica Federal do Paraná (UTFPR) — Câmpus Ponta Grossa
+              </p>
+            </div>
+            
+            <div className="text-left sm:text-right font-mono text-xs">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-corporate-100 text-corporate-800 font-semibold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                Em andamento
+              </span>
+              <span className="block text-corporate-400 mt-1">DAINF · Departamento de Informática</span>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm text-corporate-600">
+            <div className="space-y-2">
+              <h4 className="font-bold text-corporate-900 text-xs font-mono uppercase tracking-wider">
+                Fundamentos & Domínio Teórico
+              </h4>
+              <p className="leading-relaxed text-sm">
+                Formação rigorosa com foco em Estruturas de Dados Avançadas, Algoritmos, Teoria da Computação, Arquitetura de Sistemas Operacionais, Compiladores e Redes de Computadores.
+              </p>
+            </div>
+
+            <div className="space-y-2">
+              <h4 className="font-bold text-corporate-900 text-xs font-mono uppercase tracking-wider">
+                Pesquisa & Inteligência Artificial
+              </h4>
+              <p className="leading-relaxed text-sm">
+                Atuação em pesquisa acadêmica e TCC voltado a Sistemas Multiagente (MAS) e avaliação comparativa de frameworks distribuídos no DAINF.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </section>
+
+      {/* 4. OS 3 PILARES DE ATUAÇÃO (CALMO, ESPAÇADO E DIRETO) */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         <div className="space-y-1 pb-4 border-b border-corporate-200/80">

@@ -27,6 +27,35 @@ export const AboutPage = () => {
         </p>
       </header>
 
+      {/* Formação Acadêmica UTFPR */}
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold text-corporate-950">
+          Formação Acadêmica
+        </h2>
+        <div className="p-6 bg-white rounded-2xl border border-corporate-200/90 shadow-sm space-y-4">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-corporate-100 pb-4">
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-corporate-500 font-semibold">
+                Bacharelado · Em andamento
+              </span>
+              <h3 className="text-lg font-bold text-corporate-950 mt-0.5">
+                Ciência da Computação
+              </h3>
+              <p className="text-sm text-corporate-700">
+                Universidade Tecnológica Federal do Paraná (UTFPR) — Câmpus Ponta Grossa
+              </p>
+            </div>
+            <span className="text-xs font-mono text-corporate-500">
+              DAINF · Departamento de Informática
+            </span>
+          </div>
+
+          <p className="text-sm text-corporate-600 leading-relaxed">
+            Formação focada nos fundamentos rigorosos da ciência da computação: análise assintótica de algoritmos, estruturas de dados, compiladores, arquitetura de sistemas operacionais, redes e pesquisa acadêmica em Sistemas Multiagente (MAS).
+          </p>
+        </div>
+      </section>
+
       {/* Bio / Visão Profissional */}
       <section className="space-y-4 text-corporate-700 leading-relaxed text-sm sm:text-base">
         <h2 className="text-xl font-bold text-corporate-950">
