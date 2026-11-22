@@ -219,14 +219,14 @@ export const AboutPage = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
           <a
-            href="https://wa.me/5541995767851"
+            href="https://wa.me/5541995797851"
             target="_blank"
             rel="noopener noreferrer"
             className="p-4 rounded-lg bg-corporate-800 hover:bg-corporate-700 border border-corporate-700 flex items-center justify-between transition-colors"
           >
             <div className="flex items-center gap-2">
               <MessageSquare className="w-4 h-4 text-emerald-400" />
-              <span>(41) 99576-7851</span>
+              <span>(41) 99579-7851</span>
             </div>
             <span className="text-corporate-400">WhatsApp →</span>
           </a>

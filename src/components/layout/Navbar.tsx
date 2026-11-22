@@ -76,7 +76,7 @@ export const Navbar = () => {
           </a>
 
           <a
-            href="https://wa.me/5541995767851"
+            href="https://wa.me/5541995797851"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-corporate-900 text-white hover:bg-corporate-800 transition-colors font-sans text-xs font-medium"
@@ -89,7 +89,7 @@ export const Navbar = () => {
         {/* Mobile menu button */}
         <div className="flex md:hidden items-center gap-2">
           <a
-            href="https://wa.me/5541995767851"
+            href="https://wa.me/5541995797851"
             target="_blank"
             rel="noopener noreferrer"
             className="px-2.5 py-1 text-xs font-medium bg-corporate-900 text-white rounded-md"
