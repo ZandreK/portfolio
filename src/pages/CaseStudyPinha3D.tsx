@@ -32,7 +32,7 @@ export const CaseStudyPinha3D = () => {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink-primary">
-          {project.title} — Gestão Fabril, Telemetria 3D & Processamento de Slices
+          {project.title} — Gestão Fabril, Telemetria 3D & Parser de Arquivos .3mf
         </h1>
 
         <p className="text-base sm:text-lg text-ink-tertiary leading-relaxed">
@@ -97,7 +97,7 @@ export const CaseStudyPinha3D = () => {
           {project.problem}
         </p>
         <p className="text-sm sm:text-base text-ink-tertiary leading-relaxed">
-          Na rotina de fabricação digital, calcular custos requer precisão milimétrica: peso exato de filamento em gramas, tempo de máquina, consumo energético e desgaste. Fazer isso manualmente ou manter servidores em nuvem rodando parsers pesados de arquivos binários 3MF geraria custos inviáveis.
+          Na rotina de fabricação digital, calcular custos requer precisão milimétrica: peso exato de filamento em gramas, tempo de máquina e material utilizado. Esses dados ficam encapsulados dentro do arquivo .3mf (que é, na prática, um pacote ZIP contendo arquivos XML com metadados do fatiador). Fazer essa transcrição à mão a cada peça é lento e suscetível a erros, enquanto processar arquivos pesados na nuvem geraria custos desnecessários.
         </p>
       </section>
 
@@ -184,10 +184,10 @@ export const CaseStudyPinha3D = () => {
           <div className="p-4 rounded-lg bg-white border border-surface-border">
             <h3 className="text-sm font-bold text-ink-primary flex items-center gap-2">
               <CheckCircle2 className="w-4 h-4 text-ink-secondary" />
-              Processador 3D Local em Python (Economia de Nuvem)
+              Parser de Arquivos .3mf em Python (Zero Dependências Externas)
             </h3>
             <p className="text-xs sm:text-sm text-ink-tertiary mt-1 leading-relaxed">
-              Em vez de pagar computação em nuvem para descompactar arquivos pesados de 50MB a 200MB de fatiamento 3D, criamos um worker em Python que roda no ambiente de produção local, inspeciona os metadados do slice (camadas, filamento em gramas, tempo estimado) e sincroniza apenas os dados sintetizados com o banco de dados.
+              Desenvolvemos o módulo parser_3mf.py utilizando apenas a biblioteca padrão do Python (zipfile, xml.etree.ElementTree). O script inspeciona o pacote .3mf gerado por fatiadores (como Creality Print, Bambu Studio e PrusaSlicer) e extrai tempo de impressão estimado, consumo de filamento por slot (peça e purga) em gramas e bounding box da peça. Caso os metadados do slicer estejam ausentes, um algoritmo de fallback calcula o volume geométrico da malha 3D via tetraedros com sinal.
             </p>
           </div>
         </div>

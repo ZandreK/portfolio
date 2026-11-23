@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Database, BarChart3, TrendingUp, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, Landmark, Calculator, CreditCard, CheckCircle2 } from 'lucide-react';
 import { FEATURED_PROJECTS } from '../data/projectsData';
 
 export const CaseStudyPocketFinance = () => {
@@ -32,7 +32,7 @@ export const CaseStudyPocketFinance = () => {
         </div>
 
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-ink-primary">
-          {project.title} — Inteligência de Fluxo de Caixa, Séries Temporais & Analytics
+          {project.title} — Finanças Pessoais com Rendimento CDI / Selic ao Vivo
         </h1>
 
         <p className="text-base sm:text-lg text-ink-tertiary leading-relaxed">
@@ -46,16 +46,27 @@ export const CaseStudyPocketFinance = () => {
             <span className="text-ink-primary font-semibold">{project.role}</span>
           </div>
           <div>
-            <span className="text-ink-muted block uppercase">Domínio</span>
-            <span className="text-ink-primary font-semibold">Data Science & Finanças</span>
+            <span className="text-ink-muted block uppercase">Integração</span>
+            <span className="text-ink-primary font-semibold">API Banco Central (SGS)</span>
           </div>
           <div>
-            <span className="text-ink-muted block uppercase">Análise de Dados</span>
-            <span className="text-ink-primary font-semibold">Python (Pandas, NumPy)</span>
+            <span className="text-ink-muted block uppercase">Arquitetura</span>
+            <span className="text-ink-primary font-semibold">React + TypeScript (Edge)</span>
           </div>
           <div>
-            <span className="text-ink-muted block uppercase">Banco Analítico</span>
-            <span className="text-ink-primary font-semibold">PostgreSQL Materialized</span>
+            <span className="text-ink-muted block uppercase">Repositório</span>
+            {project.githubUrl ? (
+              <a 
+                href={project.githubUrl} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-ink-primary hover:underline flex items-center gap-1 font-semibold"
+              >
+                GitHub <ExternalLink className="w-3 h-3" />
+              </a>
+            ) : (
+              <span className="text-ink-muted">Privado</span>
+            )}
           </div>
         </div>
       </header>
@@ -63,7 +74,7 @@ export const CaseStudyPocketFinance = () => {
       {/* Métricas de Impacto */}
       <section className="space-y-4">
         <h2 className="text-xs font-mono uppercase tracking-wider text-ink-muted font-semibold">
-          Resultados Analíticos & Métricas
+          Diferenciais & Métricas de Arquitetura
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           {project.metrics.map((m, idx) => (
@@ -80,63 +91,67 @@ export const CaseStudyPocketFinance = () => {
       {/* O Desafio */}
       <section className="space-y-4">
         <h2 className="text-xl font-bold text-ink-primary">
-          1. O Problema de Decisão Financeira
+          1. O Problema Real de Controle Financeiro
         </h2>
         <p className="text-sm sm:text-base text-ink-tertiary leading-relaxed">
           {project.problem}
         </p>
         <p className="text-sm sm:text-base text-ink-tertiary leading-relaxed">
-          Olhar apenas para o extrato bancário de hoje é como dirigir olhando apenas pelo retrovisor. Negócios e indivíduos frequentemente entram no vermelho não por falta de faturamento, mas pelo descasamento temporal entre contas a pagar e recebíveis.
+          Quando uma conta corrente ou carteira digital (Nubank, PicPay, CDB 100% do CDI) rende diariamente, o saldo bancário diverge rapidamente do registrado em planilhas ou apps estáticos. O usuário se vê obrigado a fazer lançamentos manuais de "ajuste de saldo" todos os meses para bater as contas, perdendo a visibilidade do rendimento real acumulado.
         </p>
       </section>
 
-      {/* Pipeline de Dados & Data Science */}
+      {/* Arquitetura da Solução */}
       <section className="space-y-6">
         <h2 className="text-xl font-bold text-ink-primary">
-          2. Pipeline de Engenharia de Dados & Modelagem
+          2. Arquitetura da Solução & Motor de Rendimento
         </h2>
+        <p className="text-sm sm:text-base text-ink-tertiary leading-relaxed">
+          O Pocket Finance Hub resolve esse gargalo conectando as contas diretamente à fonte oficial de dados macroeconômicos do país e aplicando matemática financeira precisa:
+        </p>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div className="p-4 bg-white rounded-lg border border-surface-border space-y-2">
             <div className="flex items-center gap-2 text-ink-primary font-semibold text-sm">
-              <Database className="w-4 h-4 text-ink-secondary" />
-              Ingestão & De-duplicação
+              <Landmark className="w-4 h-4 text-ink-secondary" />
+              API do Banco Central (SGS)
             </div>
             <p className="text-xs text-ink-tertiary">
-              Mecanismo de parse de extratos OFX e CSV bancários. Criação de hash criptográfico baseado em (data, valor, descrição) para evitar transações duplicadas em importações repetidas.
+              Consulta pública diária das séries temporais do SGS (Série 4389 para CDI anualizado e 432 para Meta Selic Copom). Os dados são cacheados e contam com fallback de segurança para modo offline.
             </p>
           </div>
 
           <div className="p-4 bg-white rounded-lg border border-surface-border space-y-2">
             <div className="flex items-center gap-2 text-ink-primary font-semibold text-sm">
-              <TrendingUp className="w-4 h-4 text-ink-secondary" />
-              Séries Temporais Preditivas
+              <Calculator className="w-4 h-4 text-ink-secondary" />
+              Juros Compostos Diários
             </div>
             <p className="text-xs text-ink-tertiary">
-              Modelos de séries temporais para detectar despesas recorrentes (assinaturas, aluguéis, tributos) e projetar a curva de liquidez futura com intervalo de confiança.
+              Conversão rigorosa da taxa anual para taxa diária equivalente base 252 (dias úteis para CDB/LCI) ou base 365 (dias corridos para poupança), compondo o saldo exato decorrido.
             </p>
           </div>
 
           <div className="p-4 bg-white rounded-lg border border-surface-border space-y-2">
             <div className="flex items-center gap-2 text-ink-primary font-semibold text-sm">
-              <BarChart3 className="w-4 h-4 text-ink-secondary" />
-              Dashboards Analíticos Reativos
+              <CreditCard className="w-4 h-4 text-ink-secondary" />
+              Ciclo Completo de Cartões
             </div>
             <p className="text-xs text-ink-tertiary">
-              Visualização gerencial executiva: DRE simplificado, divisão percentual por centro de custo, taxa de poupança e curva de queima de caixa (runway).
+              Acompanhamento de fatura aberta, controle de limite comprometido e fluxo de liquidação: o pagamento debita da conta escolhida, registra a despesa e restaura o limite instantaneamente.
             </p>
           </div>
         </div>
 
-        {/* Bloco de Código Python / SQL */}
+        {/* Bloco de Código TypeScript da Regra de Negócio Real */}
         <div className="p-4 bg-ink-primary text-surface-tertiary rounded-md font-mono text-xs overflow-x-auto space-y-1">
-          <span className="text-ink-muted"># Pipeline analítico: cálculo de saldo acumulado e projeção móvel</span><br/>
-          <span className="text-blue-300">def</span> <span className="text-emerald-400">calcular_curva_liquidez</span>(transacoes_df, dias_futuros=90):<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;df = transacoes_df.sort_values(<span className="text-amber-300">'data'</span>)<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;df[<span className="text-amber-300">'saldo_acumulado'</span>] = df[<span className="text-amber-300">'valor'</span>].cumsum()<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;recorrencias = extrair_despesas_recorrentes(df)<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;projecao = gerar_cenario_sazonal(df[<span className="text-amber-300">'saldo_acumulado'</span>].iloc[-1], recorrencias, dias_futuros)<br/>
-          &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-blue-300">return</span> &#123; <span className="text-amber-300">'historico'</span>: df, <span className="text-amber-300">'projecao'</span>: projecao &#125;
+          <span className="text-ink-muted">// src/lib/yield.ts — Cálculo do rendimento composto por conta</span><br/>
+          <span className="text-blue-300">export function</span> <span className="text-emerald-400">calcularRendimentoConta</span>(saldoBase: <span className="text-amber-300">number</span>, taxaAnual: <span className="text-amber-300">number</span>, diasDecorridos: <span className="text-amber-300">number</span>, base: <span className="text-amber-300">252 | 365</span>) &#123;<br/>
+          &nbsp;&nbsp;<span className="text-ink-muted">// Converte taxa anual em taxa diária equivalente pela base selecionada</span><br/>
+          &nbsp;&nbsp;<span className="text-blue-300">const</span> taxaDiaria = Math.pow(1 + taxaAnual / 100, 1 / base) - 1;<br/>
+          &nbsp;&nbsp;<span className="text-blue-300">const</span> fatorAcumulado = Math.pow(1 + taxaDiaria, diasDecorridos);<br/>
+          &nbsp;&nbsp;<span className="text-blue-300">const</span> rendimento = saldoBase * (fatorAcumulado - 1);<br/>
+          &nbsp;&nbsp;<span className="text-blue-300">return</span> &#123; rendimento, saldoAtualizado: saldoBase + rendimento &#125;;<br/>
+          &#125;
         </div>
       </section>
 
@@ -163,7 +178,7 @@ export const CaseStudyPocketFinance = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="p-4 bg-white rounded-lg border border-surface-border">
             <span className="text-xs font-mono uppercase text-ink-muted font-semibold block mb-2">
-              Frontend & Visualização
+              Frontend & Interface
             </span>
             <ul className="text-xs font-mono text-ink-secondary space-y-1">
               {project.stack.frontend.map(item => (
@@ -177,10 +192,10 @@ export const CaseStudyPocketFinance = () => {
 
           <div className="p-4 bg-white rounded-lg border border-surface-border">
             <span className="text-xs font-mono uppercase text-ink-muted font-semibold block mb-2">
-              Ciência de Dados & Backend
+              APIs, Banco & Infra
             </span>
             <ul className="text-xs font-mono text-ink-secondary space-y-1">
-              {[...project.stack.backend, ...project.stack.database].map(item => (
+              {[...project.stack.backend, ...project.stack.database, ...project.stack.infrastructure].map(item => (
                 <li key={item} className="flex items-center gap-2">
                   <span className="w-1.5 h-1.5 rounded-full bg-ink-muted"></span>
                   {item}

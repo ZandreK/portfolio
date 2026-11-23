@@ -116,11 +116,11 @@ export const HomePage = () => {
       num: '01',
       title: 'Pinha 3D',
       subtitle: 'Manufatura Aditiva & Telemetria',
-      description: 'Plataforma de gestão fabril com telemetria em tempo real via Moonraker API, processamento local de GCODE em Python e catálogo de modelos 3D.',
-      tags: ['React', 'TypeScript', 'Supabase', 'Python'],
+      description: 'Plataforma de gestão fabril com telemetria em tempo real via Moonraker API, parser em Python para extração de dados de fatiamento .3mf (XML) e catálogo de modelos.',
+      tags: ['Python', 'Formato .3mf (XML)', 'Moonraker API', 'React', 'Supabase'],
       year: '2025–26',
       link: '/projetos/pinha-3d',
-      github: 'https://github.com/ZandreK/pinha-3d-sistema',
+      github: 'https://github.com/ZandreK/pinha3d-3mf-processor',
     },
     {
       num: '02',
@@ -135,11 +135,12 @@ export const HomePage = () => {
     {
       num: '03',
       title: 'Pocket Finance',
-      subtitle: 'Análise Financeira & Projeção',
-      description: 'Motor analítico para séries temporais de fluxo de caixa, importação de extratos OFX/CSV e dashboards executivos interativos.',
-      tags: ['Python', 'Pandas', 'React', 'PostgreSQL'],
+      subtitle: 'Finanças Pessoais & Rendimento CDI/Selic',
+      description: 'Controle financeiro pessoal com rendimento automático por conta baseado em CDI e Selic ao vivo via API do Banco Central (SGS), cartões e relatórios.',
+      tags: ['React', 'TypeScript', 'API Banco Central', 'Tailwind CSS'],
       year: '2026',
       link: '/projetos/pocket-finance',
+      github: 'https://github.com/ZandreK/pocket-finance-hub',
     },
   ];
 

@@ -10,7 +10,7 @@ export const ProjectsPage = () => {
     { id: 'todos', label: 'Todos os Projetos' },
     { id: 'Full Stack & IoT', label: 'Full Stack & IoT' },
     { id: 'Sistemas Comerciais', label: 'Sistemas Comerciais' },
-    { id: 'Data & Finanças', label: 'Data & Finanças' },
+    { id: 'Finanças & Full Stack', label: 'Finanças & Full Stack' },
   ];
 
   const filteredProjects = selectedCategory === 'todos' 

@@ -3,7 +3,7 @@ export interface Project {
   title: string;
   slug: string;
   summary: string;
-  category: 'Full Stack & IoT' | 'Sistemas Comerciais' | 'Data & Finanças' | 'Web & Landing Pages';
+  category: 'Full Stack & IoT' | 'Sistemas Comerciais' | 'Finanças & Full Stack' | 'Web & Landing Pages';
   role: string;
   year: string;
   status: 'Produção' | 'Concluído' | 'Em Evolução';
@@ -28,39 +28,39 @@ export const FEATURED_PROJECTS: Project[] = [
     id: 'pinha-3d',
     title: 'Pinha 3D',
     slug: '/projetos/pinha-3d',
-    summary: 'Plataforma integrada de gestão fabril, telemetria em tempo real para impressão 3D e processador autônomo de arquivos de fatiamento (.3mf e .gcode).',
+    summary: 'Plataforma integrada de gestão fabril de impressão 3D, telemetria em tempo real (Moonraker) e processador em Python para extração de custos e metadados de arquivos .3mf (XML).',
     category: 'Full Stack & IoT',
     role: 'Tech Lead, Engenharia de Software & Modelagem de Banco',
     year: '2025 - 2026',
     status: 'Produção',
-    tags: ['React', 'TypeScript', 'Supabase', 'Python', 'Moonraker API', 'Cloudflare Pages'],
+    tags: ['Python', 'Formato .3mf (XML)', 'Moonraker API', 'Supabase', 'React', 'TypeScript'],
     metrics: [
       { label: 'Telemetria Real-Time', value: '< 250ms' },
-      { label: 'Processamento Local de GCODE', value: '100% Client/Local' },
-      { label: 'Disponibilidade de Catálogo', value: '99.9%' },
-      { label: 'Custo de Nuvem', value: 'Zero (Pages + Local Worker)' }
+      { label: 'Parser .3mf (ZIP + XML)', value: '100% Python Stdlib' },
+      { label: 'Estimativa de Custos', value: 'Gramas + Tempo Real' },
+      { label: 'Custo de Nuvem', value: 'Zero (Pages + Worker Local)' }
     ],
-    problem: 'Oficinas de manufatura aditiva sofrem com a falta de sincronização entre o status físico das impressoras 3D (temperaturas, tempo restante, falhas) e a gestão comercial de pedidos, além da dificuldade de extrair metadados pesados de arquivos .3mf sem onerar servidores.',
-    solution: 'Desenvolvimento de uma arquitetura híbrida: interface reativa em React hospedada globalmente no Cloudflare Pages, backend relacional e autenticação com Supabase PostgreSQL (RLS), telemetria via Moonraker API e um processador local em Python para inspeção de arquivos 3D sem custos de nuvem.',
+    problem: 'Na operação de manufatura aditiva, todo o custo de produção é medido em gramas de filamento e tempo de impressão. Esses números ficam encapsulados dentro do pacote .3mf gerado pelo fatiador, e digitar tudo à mão a cada peça gera erros de precificação. Além disso, operar impressoras à distância exige monitoramento contínuo de temperaturas e falhas.',
+    solution: 'Desenvolvimento de uma arquitetura híbrida: interface reativa em React hospedada no Cloudflare Pages, banco e autenticação com Supabase PostgreSQL (RLS), sincronizador de telemetria em tempo real com a API Klipper/Moonraker e um parser em Python (sem dependências externas) para ler metadados do pacote .3mf (XML) com fallback geométrico.',
     architectureDetails: [
-      'Frontend SPA com React + TypeScript + Tailwind CSS compilado via Vite.',
-      'Sincronização em tempo real via WebSocket e polling inteligente com Moonraker (Klipper) na porta 7125.',
-      'Políticas de RLS (Row Level Security) rigorosas no Supabase PostgreSQL garantindo isolamento total por inquilino.',
-      'Processador 3D modular em Python capaz de extrair metadados, estimativas de peso de filamento e tempo diretamente dos slices.'
+      'Parser parser_3mf.py baseado exclusivamente na biblioteca padrão do Python (zipfile, xml.etree.ElementTree).',
+      'Suporte a arquivos gerados pelo Creality Print, Bambu Studio, PrusaSlicer e OrcaSlicer para extração de tempo, filamento (peça + purga) e bounding box.',
+      'Algoritmo de fallback geométrico com cálculo do volume real da malha pelo método dos tetraedros com sinal e densidade.',
+      'Sincronizador sync_printer.py comunicando com Klipper/Moonraker na porta 7125 e persistindo status no Supabase PostgreSQL.'
     ],
     stack: {
       frontend: ['React 18', 'TypeScript', 'Tailwind CSS', 'Lucide React', 'Vite'],
-      backend: ['Python 3.10+', 'FastAPI / Scripts Locais', 'Moonraker Klipper API'],
-      database: ['PostgreSQL (Supabase)', 'Row Level Security', 'pgAdmin 4'],
-      infrastructure: ['Cloudflare Pages (Global CDN)', 'GitHub CI/CD', 'Git']
+      backend: ['Python 3.8+ (stdlib: zipfile, xml)', 'Klipper / Moonraker API', 'Scripts Locais'],
+      database: ['PostgreSQL (Supabase)', 'Row Level Security', 'REST API'],
+      infrastructure: ['Cloudflare Pages', 'GitHub CI/CD', 'Rede Local IoT']
     },
     keyFeatures: [
-      'Dashboard executivo de pedidos, custos por grama e margem líquida.',
-      'Monitoramento de telemetria de bicos e mesas em tempo real (Creality, Voron, etc.).',
-      'Catálogo de modelos 3D com versionamento de arquivos e parâmetros de fatiamento.',
-      'Pipeline de deploy contínuo integrado com Git e Cloudflare.'
+      'Extração precisa de tempo e consumo de filamento por slot (peça + purga) direto do pacote .3mf.',
+      'Cálculo de custos automatizado por grama e tempo de operação.',
+      'Telemetria em tempo real: temperaturas de bico e mesa, progresso percentual e status de impressão.',
+      'Módulo de integração de código aberto com documentação e saída JSON/CLI.'
     ],
-    githubUrl: 'https://github.com/ZandreK/pinha-3d-sistema'
+    githubUrl: 'https://github.com/ZandreK/pinha3d-3mf-processor'
   },
   {
     id: 'pdvflow',
@@ -101,40 +101,41 @@ export const FEATURED_PROJECTS: Project[] = [
   },
   {
     id: 'pocket-finance',
-    title: 'Pocket Finance',
+    title: 'Pocket Finance Hub',
     slug: '/projetos/pocket-finance',
-    summary: 'Plataforma de inteligência financeira pessoal e corporativa, agregando conciliação bancária, previsão de fluxo de caixa e visualização analítica orientada a dados.',
-    category: 'Data & Finanças',
-    role: 'Cientista de Dados & Engenheiro Full Stack',
+    summary: 'Controle financeiro pessoal mobile-first com rendimento por conta atrelado ao CDI ou à taxa Selic ao vivo via API pública do Banco Central do Brasil (SGS).',
+    category: 'Finanças & Full Stack',
+    role: 'Engenheiro Front-End & Regra de Negócio',
     year: '2026',
     status: 'Concluído',
-    tags: ['Data Science', 'Data Analytics', 'Python', 'React', 'Timeseries', 'SQL'],
+    tags: ['React', 'TypeScript', 'API Banco Central', 'Juros Compostos', 'Tailwind CSS', 'Vite'],
     metrics: [
-      { label: 'Acurácia de Projeção', value: '94.8%' },
-      { label: 'Categorização Automatizada', value: 'Via Regras & Heurística' },
-      { label: 'Processamento de Extratos', value: 'Instantâneo (OFX/CSV)' },
-      { label: 'Privacidade de Dados', value: 'Criptografia em Repouso' }
+      { label: 'Taxas CDI / Selic', value: 'Ao Vivo (BACEN)' },
+      { label: 'Bases de Cálculo', value: '252 (Úteis) e 365' },
+      { label: 'Execução', value: '100% Client-Side' },
+      { label: 'Persistência', value: 'Local + Schema Cloud RLS' }
     ],
-    problem: 'Falta de clareza analítica em planilhas financeiras tradicionais, que falham em antecipar quebras de caixa futuras e demandam categorização manual exaustiva de despesas e receitas.',
-    solution: 'Criação de um motor analítico que processa séries temporais de fluxo de caixa, projeta cenários de curto e médio prazo com alertas de liquidez e apresenta dashboards executivos interativos.',
+    problem: 'Aplicativos financeiros tradicionais tratam contas bancárias como valores estáticos, sem refletir a rentabilidade real do dinheiro em reservas de emergência (como CDB 100% CDI, Nubank ou Tesouro Selic), além de dificultar o acompanhamento do ciclo de faturas de múltiplos cartões de crédito.',
+    solution: 'Desenvolvimento de uma aplicação web reativa que consulta diariamente as taxas oficiais do Banco Central (SGS), calculando juros compostos diários na base 252 (dias úteis) ou 365 (corridos) para exibir o saldo atualizado em tempo real com rendimento acumulado, acompanhado de gestão de faturas de cartão e lançamentos categorizados.',
     architectureDetails: [
-      'Tratamento e limpeza de dados financeiros estruturados com Python e SQL analítico (Window Functions).',
-      'Modelos de séries temporais para projeção de despesas recorrentes e detecção de anomalias.',
-      'Visualização de dados limpa e sem distrações visuais, com gráficos de dispersão e tendência.',
-      'Camada de segurança estrita para proteção de dados financeiros sensíveis.'
+      'Consumo da API pública do Banco Central (SGS séries 4389 para CDI e 432 para Meta Selic) com cache diário e tolerância a falhas offline.',
+      'Motor de cálculo financeiro (yield.ts) convertendo taxa anualizada em diária composta com suporte a múltiplos indexadores (% CDI, % Selic, % a.a., % a.m.).',
+      'Fluxo completo de cartão de crédito: controle de limite, fatura aberta e débito com quitação atômica.',
+      'Arquitetura modular pronta para rodar sem servidor (localStorage) ou conectada ao Supabase PostgreSQL com Row Level Security (RLS).'
     ],
     stack: {
-      frontend: ['React', 'TypeScript', 'Tailwind CSS', 'Charts Engine'],
-      backend: ['Python (Pandas, NumPy)', 'FastAPI'],
-      database: ['PostgreSQL Analítico', 'Views Materializadas'],
-      infrastructure: ['Cloudflare', 'GitHub Actions']
+      frontend: ['React 18', 'TypeScript', 'Tailwind CSS', 'Vite', 'Recharts'],
+      backend: ['API Banco Central (SGS)', 'Context + Reducer', 'Hooks Customizados'],
+      database: ['LocalStorage', 'Supabase PostgreSQL (Schema com RLS opcional)'],
+      infrastructure: ['GitHub', 'Vite', 'Cloudflare Pages']
     },
     keyFeatures: [
-      'Análise preditiva de saldo para os próximos 30, 60 e 90 dias.',
-      'Importação automática e parse de extratos bancários com de-duplicação.',
-      'DRE gerencial e métricas de ponto de equilíbrio financeiro.',
-      'Exportação de relatórios executivos estruturados.'
-    ]
+      'Rendimento automático por conta configurável (% do CDI, % da Selic, prefixado).',
+      'Diferenciação precisa entre dias úteis (252 para CDB/LCI) e dias corridos (365 para poupança).',
+      'Gestão de cartões de crédito com liberação automática de limite no pagamento da fatura.',
+      'Dashboard com patrimônio líquido, entradas/saídas do mês e distribuição por categoria.'
+    ],
+    githubUrl: 'https://github.com/ZandreK/pocket-finance-hub'
   }
 ];
 
