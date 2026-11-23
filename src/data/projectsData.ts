@@ -31,7 +31,7 @@ export const FEATURED_PROJECTS: Project[] = [
     summary: 'Plataforma integrada de gestão fabril, telemetria em tempo real para impressão 3D e processador autônomo de arquivos de fatiamento (.3mf e .gcode).',
     category: 'Full Stack & IoT',
     role: 'Tech Lead, Engenharia de Software & Modelagem de Banco',
-    year: '2024 - 2025',
+    year: '2025 - 2026',
     status: 'Produção',
     tags: ['React', 'TypeScript', 'Supabase', 'Python', 'Moonraker API', 'Cloudflare Pages'],
     metrics: [
@@ -69,7 +69,7 @@ export const FEATURED_PROJECTS: Project[] = [
     summary: 'Sistema de automação comercial e Ponto de Venda (PDV) de alta performance, desenhado para fluxo de caixa contínuo, controle de estoque atômico e confiabilidade operacional.',
     category: 'Sistemas Comerciais',
     role: 'Engenheiro Full Stack & DBA',
-    year: '2024',
+    year: '2026',
     status: 'Produção',
     tags: ['Full Stack', 'PostgreSQL', 'Transações ACID', 'TypeScript', 'Tailwind CSS'],
     metrics: [
@@ -106,7 +106,7 @@ export const FEATURED_PROJECTS: Project[] = [
     summary: 'Plataforma de inteligência financeira pessoal e corporativa, agregando conciliação bancária, previsão de fluxo de caixa e visualização analítica orientada a dados.',
     category: 'Data & Finanças',
     role: 'Cientista de Dados & Engenheiro Full Stack',
-    year: '2024',
+    year: '2026',
     status: 'Concluído',
     tags: ['Data Science', 'Data Analytics', 'Python', 'React', 'Timeseries', 'SQL'],
     metrics: [
@@ -143,7 +143,7 @@ export const OTHER_PROJECTS = [
     id: 'doutor-saude',
     title: 'Doutor Saúde',
     category: 'Web & Landing Pages',
-    period: '2024',
+    period: '2026',
     description: 'Ambiente digital para clínica médica com landing pages de alta conversão, campanhas sazonais estruturadas (Outubro Rosa, Novembro Azul) e agendamento simplificado.',
     stack: ['React', 'Tailwind CSS', 'Vite', 'SEO Otimizado'],
     highlights: 'Otimização Lighthouse 98+, responsividade multiplataforma e arquitetura de componentes reutilizáveis.'
@@ -152,7 +152,7 @@ export const OTHER_PROJECTS = [
     id: 'evntuz-brilluz',
     title: 'Evntuz & Brilluz',
     category: 'Sistemas Comerciais & Catálogos',
-    period: '2024',
+    period: '2026',
     description: 'Plataforma para catálogo comercial de iluminação e gestão de locações para eventos corporativos e sociais.',
     stack: ['TypeScript', 'React', 'Tailwind CSS', 'PostgreSQL'],
     highlights: 'Catálogo dinâmico de produtos com busca facetada e organização por perfil de evento.'

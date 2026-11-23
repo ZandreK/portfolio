@@ -1,15 +1,24 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * Hook that adds 'visible' class to an element when it enters the viewport.
- * Works with the .reveal CSS class defined in index.css.
+ * Hook that toggles 'visible' class on an element as it enters and leaves the viewport,
+ * enabling smooth fade-in and fade-out transitions on scroll.
  * 
- * @param threshold - How much of the element must be visible (0-1). Default 0.1
- * @param rootMargin - Margin around root. Default '0px 0px -60px 0px' to trigger slightly before fully visible
+ * Works with CSS animation classes:
+ * - .reveal
+ * - .reveal-soft
+ * - .reveal-left
+ * - .reveal-right
+ * - .reveal-scale
+ * 
+ * @param threshold - Minimum visible ratio to trigger (0-1). Default: 0.05
+ * @param rootMargin - Viewport margins to buffer fade-in / fade-out. Default: '60px 0px -40px 0px'
+ * @param once - If true, only fades in once and stays visible. Default: false (bidirectional fade in/out)
  */
 export function useReveal<T extends HTMLElement = HTMLDivElement>(
-  threshold: number = 0.1,
-  rootMargin: string = '0px 0px -60px 0px'
+  threshold: number = 0.05,
+  rootMargin: string = '60px 0px -40px 0px',
+  once: boolean = false
 ) {
   const ref = useRef<T>(null);
 
@@ -21,7 +30,11 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
       ([entry]) => {
         if (entry.isIntersecting) {
           element.classList.add('visible');
-          observer.unobserve(element); // Only animate once
+          if (once) {
+            observer.unobserve(element);
+          }
+        } else if (!once) {
+          element.classList.remove('visible');
         }
       },
       { threshold, rootMargin }
@@ -32,17 +45,23 @@ export function useReveal<T extends HTMLElement = HTMLDivElement>(
     return () => {
       observer.disconnect();
     };
-  }, [threshold, rootMargin]);
+  }, [threshold, rootMargin, once]);
 
   return ref;
 }
 
 /**
- * Hook for observing multiple children elements with stagger effect.
- * Apply to a parent container. Children will animate in sequence.
+ * Hook for parent containers whose child elements stagger their fade-in and fade-out.
+ * Apply to a parent with class .stagger-children.
+ * 
+ * @param threshold - Default: 0.05
+ * @param rootMargin - Default: '60px 0px -40px 0px'
+ * @param once - Default: false
  */
 export function useStaggerReveal<T extends HTMLElement = HTMLDivElement>(
-  threshold: number = 0.1
+  threshold: number = 0.05,
+  rootMargin: string = '60px 0px -40px 0px',
+  once: boolean = false
 ) {
   const ref = useRef<T>(null);
 
@@ -54,10 +73,14 @@ export function useStaggerReveal<T extends HTMLElement = HTMLDivElement>(
       ([entry]) => {
         if (entry.isIntersecting) {
           element.classList.add('visible');
-          observer.unobserve(element);
+          if (once) {
+            observer.unobserve(element);
+          }
+        } else if (!once) {
+          element.classList.remove('visible');
         }
       },
-      { threshold, rootMargin: '0px 0px -40px 0px' }
+      { threshold, rootMargin }
     );
 
     observer.observe(element);
@@ -65,7 +88,7 @@ export function useStaggerReveal<T extends HTMLElement = HTMLDivElement>(
     return () => {
       observer.disconnect();
     };
-  }, [threshold]);
+  }, [threshold, rootMargin, once]);
 
   return ref;
 }

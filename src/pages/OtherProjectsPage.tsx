@@ -38,7 +38,7 @@ export const OtherProjectsPage = () => {
             <span className="px-2.5 py-0.5 rounded bg-surface-tertiary text-ink-secondary font-semibold">
               Saúde & Conversão Web
             </span>
-            <span className="text-ink-muted">2024 · Produção</span>
+            <span className="text-ink-muted">2026 · Produção</span>
           </div>
 
           <div>
@@ -89,7 +89,7 @@ export const OtherProjectsPage = () => {
             <span className="px-2.5 py-0.5 rounded bg-surface-tertiary text-ink-secondary font-semibold">
               Catálogo Comercial & Eventos
             </span>
-            <span className="text-ink-muted">2024 · Produção</span>
+            <span className="text-ink-muted">2026 · Produção</span>
           </div>
 
           <div>
