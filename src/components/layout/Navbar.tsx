@@ -1,10 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Github, Linkedin, ArrowUpRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [location.pathname]);
 
   const navLinks = [
     { label: 'Início', path: '/' },
@@ -18,87 +29,67 @@ export const Navbar = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-corporate-200/60 transition-all">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+    <header
+      className={`sticky top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/90 backdrop-blur-lg shadow-[0_1px_0_0_rgba(0,0,0,0.04)]'
+          : 'bg-transparent'
+      }`}
+    >
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 md:h-20 flex items-center justify-between">
         
         {/* Brand */}
-        <Link 
-          to="/" 
-          className="flex items-center gap-2 group transition-opacity"
-          onClick={() => setMobileMenuOpen(false)}
-        >
-          <span className="font-semibold text-corporate-900 tracking-tight text-base group-hover:text-corporate-700 transition-colors">
+        <Link to="/" className="flex items-center group">
+          <span className="text-ink-primary font-semibold text-[15px] tracking-[-0.01em] group-hover:opacity-70 transition-opacity">
             André Martins
-          </span>
-          <span className="text-corporate-300 font-light">/</span>
-          <span className="text-xs text-corporate-500 font-mono hidden sm:inline">
-            Software & Dados
           </span>
         </Link>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-6">
+        {/* Desktop Navigation - Center */}
+        <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
-              className={`text-sm transition-colors ${
+              className={`relative text-[13px] tracking-wide transition-colors py-1 ${
                 isActive(link.path)
-                  ? 'text-corporate-950 font-semibold'
-                  : 'text-corporate-500 hover:text-corporate-900'
+                  ? 'text-ink-primary font-medium'
+                  : 'text-ink-tertiary hover:text-ink-primary'
               }`}
             >
               {link.label}
+              {isActive(link.path) && (
+                <span className="absolute -bottom-0.5 left-0 right-0 h-[1.5px] bg-ink-primary rounded-full" />
+              )}
             </Link>
           ))}
         </nav>
 
-        {/* Desktop Direct Links */}
-        <div className="hidden md:flex items-center gap-4 text-xs font-mono">
-          <a
-            href="https://github.com/ZandreK"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-corporate-500 hover:text-corporate-950 transition-colors flex items-center gap-1"
-          >
-            <Github className="w-3.5 h-3.5" />
-            <span>GitHub</span>
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/andré-m-9b8ba230b"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-corporate-500 hover:text-corporate-950 transition-colors flex items-center gap-1"
-          >
-            <Linkedin className="w-3.5 h-3.5" />
-            <span>LinkedIn</span>
-          </a>
-
+        {/* Desktop CTA */}
+        <div className="hidden md:flex items-center">
           <a
             href="https://wa.me/5541995797851"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-corporate-900 text-white hover:bg-corporate-800 transition-colors font-sans text-xs font-medium"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-ink-primary text-white text-[12px] font-medium tracking-wide hover:bg-accent-hover transition-colors"
           >
             Contato
-            <ArrowUpRight className="w-3 h-3 opacity-70" />
           </a>
         </div>
 
-        {/* Mobile menu button */}
-        <div className="flex md:hidden items-center gap-2">
+        {/* Mobile */}
+        <div className="flex md:hidden items-center gap-3">
           <a
             href="https://wa.me/5541995797851"
             target="_blank"
             rel="noopener noreferrer"
-            className="px-2.5 py-1 text-xs font-medium bg-corporate-900 text-white rounded-md"
+            className="px-3 py-1.5 text-[11px] font-medium bg-ink-primary text-white rounded-full"
           >
             Contato
           </a>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-1.5 text-corporate-600 hover:text-corporate-900"
+            className="p-1.5 text-ink-tertiary hover:text-ink-primary transition-colors"
             aria-label="Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
@@ -108,42 +99,27 @@ export const Navbar = () => {
       </div>
 
       {/* Mobile dropdown */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-b border-corporate-200 bg-white/95 backdrop-blur-md px-4 py-4 space-y-3">
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-out ${
+          mobileMenuOpen ? 'max-h-64 opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="px-5 pb-6 pt-2 space-y-1 bg-white">
           {navLinks.map((link) => (
             <Link
               key={link.path}
               to={link.path}
-              onClick={() => setMobileMenuOpen(false)}
-              className={`block text-sm py-1.5 ${
+              className={`block py-2.5 text-sm transition-colors ${
                 isActive(link.path)
-                  ? 'text-corporate-950 font-semibold'
-                  : 'text-corporate-600'
+                  ? 'text-ink-primary font-medium'
+                  : 'text-ink-tertiary'
               }`}
             >
               {link.label}
             </Link>
           ))}
-          <div className="pt-3 border-t border-corporate-100 flex items-center gap-4 text-xs font-mono text-corporate-600">
-            <a
-              href="https://github.com/ZandreK"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1"
-            >
-              <Github className="w-3.5 h-3.5" /> GitHub
-            </a>
-            <a
-              href="https://www.linkedin.com/in/andré-m-9b8ba230b"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1"
-            >
-              <Linkedin className="w-3.5 h-3.5" /> LinkedIn
-            </a>
-          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };

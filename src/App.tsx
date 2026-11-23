@@ -12,7 +12,7 @@ import { OtherProjectsPage } from './pages/OtherProjectsPage';
 
 export function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-corporate-50 text-corporate-900">
+    <div className="min-h-screen flex flex-col bg-white text-ink-primary">
       <ScrollToTop />
       <Navbar />
       <main className="flex-1">
